@@ -31,8 +31,10 @@ class GeometricBrownianMotionProcessor:
         cmap = plt.cm.get_cmap(
             "tab20", self.one_dim_bm_processor.number_of_sample_paths)
         plt.figure(figsize=(20, 10))
+
         for i in range(self.one_dim_bm_processor.number_of_sample_paths):
             gbms[i].plot(color=cmap(i))
+
         plt.title("Geometric Brownian Motion")
         plt.xlabel("t")
         plt.ylabel("S(t)")

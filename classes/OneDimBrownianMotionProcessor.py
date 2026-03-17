@@ -20,8 +20,10 @@ class OneDimBrownianMotionProcessor:
     def plot_brownian_motions(self, brownian_motions):
         cmap = plt.cm.get_cmap("tab20", self.number_of_sample_paths)
         plt.figure(figsize=(20, 10))
+
         for i in range(self.number_of_sample_paths):
             brownian_motions[i].plot(color=cmap(i))
+
         plt.title("1D Brownian Motion")
         plt.xlabel("t")
         plt.ylabel("X(t)")
