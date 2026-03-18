@@ -1,5 +1,3 @@
-import numpy as np
-
 from classes.SimulationInitialiser import SimulationInitialiser
 from classes.OneDimBrownianMotionProcessor import OneDimBrownianMotionProcessor
 from classes.GeometricBrownianMotionProcessor import GeometricBrownianMotionProcessor
