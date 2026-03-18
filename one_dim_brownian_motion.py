@@ -1,5 +1,4 @@
-from helper_functions import get_float_from_user
-from helper_functions import get_int_from_user
+from classes.SimulationInitialiser import SimulationInitialiser
 from classes.OneDimBrownianMotionProcessor import OneDimBrownianMotionProcessor
 
 
@@ -11,17 +10,11 @@ def main():
 
 
 if __name__ == "__main__":
-    increment = get_float_from_user("How large should each increment to be? ")
-
-    while True:
-        max_time = get_int_from_user(
-            "At what time should the simulation end? ")
-        if (max_time > increment):
-            break
-
-    number_of_sample_paths = get_int_from_user(
-        "How many sample paths do you want? ")
+    
+    simulation_initialiser = SimulationInitialiser()
+    increment, max_time, number_of_sample_paths = simulation_initialiser.get_1D_bm_parameters()
 
     bm_processor = OneDimBrownianMotionProcessor(
         increment, max_time, number_of_sample_paths)
+
     main()
