@@ -10,7 +10,7 @@ def main():
 
 
 if __name__ == "__main__":
-    
+
     simulation_initialiser = SimulationInitialiser()
     increment, max_time, number_of_sample_paths = simulation_initialiser.get_1D_bm_parameters()
 
