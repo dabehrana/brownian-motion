@@ -13,4 +13,4 @@ class MonteCarloOptionProcessor:
         return np.maximum(gbms.tail(1).item() - self.strike_price, 0)
     
     def calculate_expectation(self, arr):
-        np.mean(arr)
+        return np.mean(arr)
