@@ -6,6 +6,7 @@ def main():
     brownian_motions = [0] * number_of_sample_paths
     for i in range(number_of_sample_paths):
         brownian_motions[i] = bm_processor.simulate_1D_brownian_motion()
+    print("Plotting simulations...")
     bm_processor.plot_brownian_motions(brownian_motions)
 
 
@@ -18,4 +19,3 @@ if __name__ == "__main__":
         increment, max_time, number_of_sample_paths)
 
     main()
-    

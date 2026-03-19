@@ -17,7 +17,9 @@ def main():
     expectation = monte_carlo_option_processor.calculate_expectation(
         call_payoffs)
     fair_price = monte_carlo_option_processor.calculate_fair_price(gbms[0], expectation)
-    print(fair_price)
+    print(f"Fair price estimation: {fair_price}")
+    print("Plotting simulations...")
+    geom_bm_processor.plot_geometric_brownian_motions(gbms)
 
 
 if __name__ == "__main__":
