@@ -16,7 +16,8 @@ def main():
             gbms[i])
     expectation = monte_carlo_option_processor.calculate_expectation(
         call_payoffs)
-    print(expectation)
+    fair_price = monte_carlo_option_processor.calculate_fair_price(gbms[0], expectation)
+    print(fair_price)
 
 
 if __name__ == "__main__":

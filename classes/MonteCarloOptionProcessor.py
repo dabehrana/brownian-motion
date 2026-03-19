@@ -14,3 +14,6 @@ class MonteCarloOptionProcessor:
 
     def calculate_expectation(self, arr):
         return np.mean(arr)
+    
+    def calculate_fair_price(self, gbms: pd.Series, expectation):
+        return np.exp(-self.geom_bm_processor.mu * gbms.index[-1]) * expectation 
