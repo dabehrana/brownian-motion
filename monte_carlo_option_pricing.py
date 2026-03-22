@@ -5,6 +5,7 @@ from classes.MonteCarloOptionProcessor import MonteCarloOptionProcessor
 
 
 def main():
+    print("Running simulations...\n")
     brownian_motions = [0] * number_of_sample_paths
     gbms = [0] * number_of_sample_paths
     call_payoffs = [0] * number_of_sample_paths
@@ -17,9 +18,11 @@ def main():
     expectation = monte_carlo_option_processor.calculate_expectation(
         call_payoffs)
     fair_price = monte_carlo_option_processor.calculate_fair_price(gbms[0], expectation)
-    print(f"Fair price estimation: {fair_price}")
-    print("Plotting simulations...")
-    geom_bm_processor.plot_geometric_brownian_motions(gbms)
+    black_scholes_estimate = monte_carlo_option_processor.calulate_black_scholes(gbms[0])
+    print(f"Fair price estimate: {fair_price}")
+    print(f"Black-Scholes estimate: {black_scholes_estimate}")
+    # print("Plotting simulations...")
+    # geom_bm_processor.plot_geometric_brownian_motions(gbms)
 
 
 if __name__ == "__main__":
