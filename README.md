@@ -14,4 +14,6 @@ This project implements a Monte Carlo simulation to price European call options 
 - matplotlib
 
 ## How to Run
-python main.py
+- python monte_carlo_option_pricing.py (for option pricing and Black-Scholes comparison)
+- python geometric_brownian_motion.py (for simulation and plots of geometric BM)
+- python one_dim_brownian_motion.py (for simulation and plots of 1D BM)
