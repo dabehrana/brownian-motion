@@ -21,8 +21,6 @@ def main():
     black_scholes_estimate = monte_carlo_option_processor.calulate_black_scholes(gbms[0])
     print(f"Fair price estimate: {fair_price}")
     print(f"Black-Scholes estimate: {black_scholes_estimate}")
-    # print("Plotting simulations...")
-    # geom_bm_processor.plot_geometric_brownian_motions(gbms)
 
 
 if __name__ == "__main__":
