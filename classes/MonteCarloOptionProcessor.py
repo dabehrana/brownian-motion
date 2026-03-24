@@ -33,4 +33,4 @@ class MonteCarloOptionProcessor:
         return s_0 * norm_d1 - k * discount_factor * norm_d2
 
     def calculate_error(self, val1, val2):
-        return 100 * (val2 - val1) / val1
+        return np.absolute(100 * (val2 - val1) / val1)
