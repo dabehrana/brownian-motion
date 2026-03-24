@@ -5,12 +5,11 @@ from .GeometricBrownianMotionProcessor import GeometricBrownianMotionProcessor
 
 
 class MonteCarloOptionProcessor:
-    
 
     def __init__(self, geom_bm_processor: GeometricBrownianMotionProcessor, strike_price):
         self.geom_bm_processor = geom_bm_processor
         self.strike_price = strike_price
-        self.RISK_FREE_RATE = 0.04
+        self.RISK_FREE_RATE = 0.05
 
     def calculate_payoff(self, gbms: pd.Series):
         return np.maximum(gbms.tail(1).item() - self.strike_price, 0)
@@ -26,12 +25,13 @@ class MonteCarloOptionProcessor:
         k = self.strike_price
         sigma = self.geom_bm_processor.sigma
         final_time = max_time
-        d_1 = (np.log(s_0/k) + final_time * (self.RISK_FREE_RATE + 0.5 * (sigma**2))) / (self.geom_bm_processor.sigma * np.sqrt(final_time))
+        d_1 = (np.log(s_0/k) + final_time * (self.RISK_FREE_RATE + 0.5 *
+               (sigma**2))) / (self.geom_bm_processor.sigma * np.sqrt(final_time))
         d_2 = d_1 - sigma * np.sqrt(final_time)
         norm_d1 = norm.cdf(d_1)
         norm_d2 = norm.cdf(d_2)
         discount_factor = np.exp(-self.RISK_FREE_RATE * final_time)
         return s_0 * norm_d1 - k * discount_factor * norm_d2
-    
+
     def calculate_error(self, val1, val2):
         return 100 * (val2 - val1) / val1
