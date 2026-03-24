@@ -17,9 +17,12 @@ def main():
             gbms[i])
     expectation = monte_carlo_option_processor.calculate_expectation(
         call_payoffs)
-    fair_price = monte_carlo_option_processor.calculate_fair_price(gbms[0], expectation)
-    black_scholes_estimate = monte_carlo_option_processor.calulate_black_scholes(gbms[0])
-    pct_error = monte_carlo_option_processor.calculate_error(black_scholes_estimate, fair_price)
+    fair_price = monte_carlo_option_processor.calculate_fair_price(
+        gbms[0], expectation)
+    black_scholes_estimate = monte_carlo_option_processor.calulate_black_scholes(
+        gbms[0])
+    pct_error = monte_carlo_option_processor.calculate_error(
+        black_scholes_estimate, fair_price)
     print(f"Fair price estimate: {fair_price}")
     print(f"Black-Scholes estimate: {black_scholes_estimate}")
     print(f"Percentage error: {pct_error}%")
