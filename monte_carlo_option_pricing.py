@@ -18,24 +18,25 @@ def main():
     expectation = monte_carlo_option_processor.calculate_expectation(
         call_payoffs)
     fair_price = monte_carlo_option_processor.calculate_fair_price(gbms[0], expectation)
-    black_scholes_estimate = monte_carlo_option_processor.calulate_black_scholes(max_time)
+    black_scholes_estimate = monte_carlo_option_processor.calulate_black_scholes(gbms[0])
     pct_error = monte_carlo_option_processor.calculate_error(black_scholes_estimate, fair_price)
     print(f"Fair price estimate: {fair_price}")
     print(f"Black-Scholes estimate: {black_scholes_estimate}")
-    print(f"Percentage error: {pct_error}")
+    print(f"Percentage error: {pct_error}%")
 
 
 if __name__ == "__main__":
 
     simulation_initialiser = SimulationInitialiser()
     increment, max_time, number_of_sample_paths = simulation_initialiser.get_1D_bm_parameters()
-    mu, sigma, s_0 = simulation_initialiser.get_geom_bm_parameters()
+    sigma, s_0 = simulation_initialiser.get_risk_free_geom_bm_parameters()
     strike_price = simulation_initialiser.get_monte_carlo_parameters()
+    RISK_FREE_RATE = 0.04
 
     one_dim_bm_processor = OneDimBrownianMotionProcessor(
         increment, max_time, number_of_sample_paths)
     geom_bm_processor = GeometricBrownianMotionProcessor(
-        one_dim_bm_processor, mu, sigma, s_0)
+        one_dim_bm_processor, RISK_FREE_RATE, sigma, s_0)
     monte_carlo_option_processor = MonteCarloOptionProcessor(
         geom_bm_processor, strike_price)
 

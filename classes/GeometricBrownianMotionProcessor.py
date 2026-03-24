@@ -6,10 +6,10 @@ from .OneDimBrownianMotionProcessor import OneDimBrownianMotionProcessor
 
 class GeometricBrownianMotionProcessor:
 
-    def __init__(self, one_dim_bm_processor: OneDimBrownianMotionProcessor, mu, sigma, s_0):
+    def __init__(self, one_dim_bm_processor: OneDimBrownianMotionProcessor, drift, sigma, s_0):
 
         self.one_dim_bm_processor = one_dim_bm_processor
-        self.mu = mu
+        self.drift = drift
         self.sigma = sigma
         self.s_0 = s_0
 
@@ -23,7 +23,7 @@ class GeometricBrownianMotionProcessor:
         for t in timeline:
             realisation = self.s_0 * \
                 np.exp(self.sigma*bm.loc[t] +
-                       (t*(self.mu - 0.5 * (self.sigma**2))))
+                       (t*(self.drift - 0.5 * (self.sigma**2))))
             realisations = np.concatenate([realisations, [realisation]])
         return pd.Series(realisations, index=[time for time in timeline])
 
