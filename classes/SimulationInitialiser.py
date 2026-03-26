@@ -8,7 +8,7 @@ class SimulationInitialiser:
         increment = get_float_from_user("How large should each increment be? ")
 
         while True:
-            max_time = get_int_from_user(
+            max_time = get_float_from_user(
                 "At what time should the simulation end? ")
             if (max_time > increment):
                 break
@@ -21,12 +21,12 @@ class SimulationInitialiser:
     def get_geom_bm_parameters(self):
         mu = get_float_from_user("Please enter a value for drift: ")
         sigma = get_float_from_user("Please enter a value for volatility: ")
-        s_0 = get_int_from_user("Please enter the initial value: ")
+        s_0 = get_float_from_user("Please enter the initial value: ")
         return mu, sigma, s_0
     
     def get_risk_free_geom_bm_parameters(self):
         sigma = get_float_from_user("Please enter a value for volatility: ")
-        s_0 = get_int_from_user("Please enter the initial value: ")
+        s_0 = get_float_from_user("Please enter the initial value: ")
         return sigma, s_0
 
     def get_monte_carlo_parameters(self):
