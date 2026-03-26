@@ -27,6 +27,7 @@ def main():
         gbms[0], expectation)
     black_scholes_estimate = monte_carlo_option_processor.calulate_black_scholes(
         gbms[0])
+    
     pct_error = monte_carlo_option_processor.calculate_error(
         black_scholes_estimate, fair_price)
     print_results(fair_price, black_scholes_estimate, pct_error)
