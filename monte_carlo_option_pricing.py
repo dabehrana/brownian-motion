@@ -12,7 +12,7 @@ def main():
     gbms = [0] * number_of_sample_paths
     call_payoffs = [0] * number_of_sample_paths
 
-    #Parallelise simulations
+    # Parallelise simulations
     with concurrent.futures.ProcessPoolExecutor() as excecutor:
         f1 = partial(run_simulations, geom_bm_processor=geom_bm_processor)
         f2 = partial(calculate_payoffs,
@@ -25,18 +25,18 @@ def main():
     expectation = monte_carlo_option_processor.calculate_expectation(
         call_payoffs)
 
-    #estimate the option price today using Monte Carlo simulation
+    # estimate the option price today using Monte Carlo simulation
     fair_price = monte_carlo_option_processor.calculate_fair_price(
         gbms[0], expectation)
-    
-    #obtain option price estimate from the Black-Scholes formula 
+
+    # obtain option price estimate from the Black-Scholes formula
     black_scholes_estimate = monte_carlo_option_processor.calulate_black_scholes(
         gbms[0])
-    
-    #compare values given by both estimates
+
+    # compare values given by both estimates
     pct_error = monte_carlo_option_processor.calculate_error(
         black_scholes_estimate, fair_price)
-    
+
     print_results(fair_price, black_scholes_estimate, pct_error)
 
 
@@ -61,16 +61,16 @@ def print_results(fair_price, black_scholes_estimate, pct_error):
 if __name__ == "__main__":
 
     simulation_initialiser = SimulationInitialiser()
-    #timestep, duration and no. of simulations
+    # timestep, duration and no. of simulations
     increment, max_time, number_of_sample_paths = simulation_initialiser.get_1D_bm_parameters()
 
-    #volatility and initial value of Geometric BM
+    # volatility and initial value of Geometric BM
     sigma, s_0 = simulation_initialiser.get_risk_free_geom_bm_parameters()
 
-    #price at which option can be bought
+    # price at which option can be bought
     strike_price = simulation_initialiser.get_monte_carlo_parameters()
-    
-    #Monte Carlo simulation uses risk-free rate instead of drift given by mu
+
+    # Monte Carlo simulation uses risk-free rate instead of drift given by mu
     RISK_FREE_RATE = 0.04
 
     one_dim_bm_processor = OneDimBrownianMotionProcessor(
