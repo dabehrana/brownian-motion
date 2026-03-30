@@ -12,9 +12,14 @@ class OneDimBrownianMotionProcessor:
 
     def simulate_1D_brownian_motion(self):
         timeline = np.arange(0, self.max_time, self.increment)
+
+        #Obtain normal realisations for each timestep of length increment
         realisations = np.random.normal(
             0, np.sqrt(self.increment), len(timeline[1:]))
+        
+        #Build 1D BM by combining the normal realisations 
         process = np.concatenate([[0], np.cumsum(realisations)])
+
         return pd.Series(process, index=[time for time in timeline])
 
     def plot_brownian_motions(self, brownian_motions):

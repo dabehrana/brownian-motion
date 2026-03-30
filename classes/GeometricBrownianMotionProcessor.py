@@ -16,15 +16,18 @@ class GeometricBrownianMotionProcessor:
     def simulate_1D_brownian_motion(self):
         return self.one_dim_bm_processor.simulate_1D_brownian_motion()
 
-    def simulate_geometric_brownian_motion(self, bm):
+    def simulate_geometric_brownian_motion(self, bm : pd.Series):
         realisations = []
         timeline = np.arange(
             0, self.one_dim_bm_processor.max_time, self.one_dim_bm_processor.increment)
+        
+        # Calculate value of Geometric BM at time t
         for t in timeline:
             realisation = self.s_0 * \
                 np.exp(self.sigma*bm.loc[t] +
                        (t*(self.drift - 0.5 * (self.sigma**2))))
             realisations = np.concatenate([realisations, [realisation]])
+            
         return pd.Series(realisations, index=[time for time in timeline])
 
     def plot_geometric_brownian_motions(self, gbms):
