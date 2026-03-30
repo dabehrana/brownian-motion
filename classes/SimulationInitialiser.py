@@ -23,7 +23,7 @@ class SimulationInitialiser:
         sigma = get_float_from_user("Please enter a value for volatility: ")
         s_0 = get_float_from_user("Please enter the initial value: ")
         return mu, sigma, s_0
-    
+
     def get_risk_free_geom_bm_parameters(self):
         sigma = get_float_from_user("Please enter a value for volatility: ")
         s_0 = get_float_from_user("Please enter the initial value: ")
