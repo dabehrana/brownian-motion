@@ -5,10 +5,9 @@ def get_float_from_user(prompt):
             value = float(input(prompt))
             return value
         except ValueError:
-            print("\n\033[1;93m" + 
-            "Invalid value. Please try again..." +
-            "\033[0m")
-            pass
+            print("\n\033[1;93m" +
+                  "Invalid value. Please try again..." +
+                  "\033[0m")
 
 
 def get_int_from_user(prompt):
@@ -17,7 +16,6 @@ def get_int_from_user(prompt):
             value = int(get_float_from_user(prompt))
             return value
         except ValueError:
-            print("\n\033[1;93m"+
-            "Invalid value. Please try again..." +
-            "\033[0m")
-            pass
+            print("\n\033[1;93m" +
+                  "Invalid value. Please try again..." +
+                  "\033[0m")
