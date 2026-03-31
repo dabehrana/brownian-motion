@@ -8,12 +8,12 @@ import time
 def main():
     brownian_motions = [0] * number_of_sample_paths
 
-    #Parallelise simulations    
+    # Parallelise simulations
     with concurrent.futures.ProcessPoolExecutor() as executor:
         f = partial(run_simulations, bm_processor=bm_processor)
         brownian_motions = list(executor.map(
             f, brownian_motions, chunksize=100))
-        
+
     if number_of_sample_paths <= 100:
         print("Plotting simulations...")
         bm_processor.plot_in_real_time(brownian_motions)
