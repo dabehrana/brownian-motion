@@ -22,13 +22,27 @@ class OneDimBrownianMotionProcessor:
 
         return pd.Series(process, index=[time for time in timeline])
 
-    def plot_brownian_motions(self, brownian_motions):
+    def plot_in_real_time(self, brownian_motions):
+        cmap = plt.cm.get_cmap("tab20", self.number_of_sample_paths)
+        plt.ion()
+        fig, ax = plt.subplots()
+        plt.title("1D Brownian Motion")
+        plt.xlabel("t")
+        plt.ylabel("X(t)")
+        plt.grid(True, linewidth=0.2, linestyle="--", alpha=0.6)
+        plt.legend()
+        plt.tight_layout()
+        for i in range(self.number_of_sample_paths):
+            brownian_motions[i].plot(ax=ax, color=cmap(i))
+            plt.pause(0.001)
+        plt.ioff
+        input("Press enter to close the figure or end the program")
+
+    def plot_and_display(self, brownian_motions):
         cmap = plt.cm.get_cmap("tab20", self.number_of_sample_paths)
         plt.figure(figsize=(20, 10))
-
         for i in range(self.number_of_sample_paths):
             brownian_motions[i].plot(color=cmap(i))
-
         plt.title("1D Brownian Motion")
         plt.xlabel("t")
         plt.ylabel("X(t)")
