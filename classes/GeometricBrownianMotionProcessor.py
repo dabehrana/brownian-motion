@@ -45,3 +45,38 @@ class GeometricBrownianMotionProcessor:
         plt.legend()
         plt.tight_layout()
         plt.show()
+
+    def plot_in_real_time(self, gbms):
+        cmap = plt.cm.get_cmap(
+            "tab20", self.one_dim_bm_processor.number_of_sample_paths)
+        plt.ion()
+        fig, ax = plt.subplots()
+        plt.title("Geometric Brownian Motion")
+        plt.xlabel("t")
+        plt.ylabel("S(t)")
+        plt.grid(True, linewidth=0.2, linestyle="--", alpha=0.6)
+        plt.legend()
+        plt.tight_layout()
+
+        for i in range(self.one_dim_bm_processor.number_of_sample_paths):
+            gbms[i].plot(ax=ax, color=cmap(i))
+            plt.pause(0.001)
+
+        plt.ioff
+        input("Press enter to close the figure or end the program")
+
+    def plot_and_display(self, gbms):
+        cmap = plt.cm.get_cmap(
+            "tab20", self.one_dim_bm_processor.number_of_sample_paths)
+        plt.figure(figsize=(20, 10))
+
+        for i in range(self.one_dim_bm_processor.number_of_sample_paths):
+            gbms[i].plot(color=cmap(i))
+
+        plt.title("Geometric Brownian Motion")
+        plt.xlabel("t")
+        plt.ylabel("S(t)")
+        plt.grid(True, linewidth=0.2, linestyle="--", alpha=0.6)
+        plt.legend()
+        plt.tight_layout()
+        plt.show()

@@ -32,9 +32,11 @@ class OneDimBrownianMotionProcessor:
         plt.grid(True, linewidth=0.2, linestyle="--", alpha=0.6)
         plt.legend()
         plt.tight_layout()
+
         for i in range(self.number_of_sample_paths):
             brownian_motions[i].plot(ax=ax, color=cmap(i))
             plt.pause(0.001)
+
         plt.ioff
         input("Press enter to close the figure or end the program")
 

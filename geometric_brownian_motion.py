@@ -14,8 +14,12 @@ def main():
         f = partial(run_simulations, geom_bm_processor=geom_bm_processor)
         gbms = list(excecutor.map(f, brownian_motions, gbms, chunksize=100))
 
-    print("Plotting simulations...")
-    geom_bm_processor.plot_geometric_brownian_motions(gbms)
+    if number_of_sample_paths <= 100:
+        print("Plotting simulations...")
+        geom_bm_processor.plot_in_real_time(gbms)
+    else:
+        print("Plotting simulations (will display on completion)...")
+        geom_bm_processor.plot_and_display(gbms)
 
 
 def run_simulations(brownian_motions, gbms, geom_bm_processor: GeometricBrownianMotionProcessor):
