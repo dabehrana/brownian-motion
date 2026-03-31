@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from helper_functions import find_coprime
+from helper_functions import conduct_bijection
 
 
 class OneDimBrownianMotionProcessor:
@@ -33,8 +35,12 @@ class OneDimBrownianMotionProcessor:
         plt.legend()
         plt.tight_layout()
 
+        # Will use this value to "randomise" the order of colours on the graph
+        a = find_coprime(self.number_of_sample_paths)
+
         for i in range(self.number_of_sample_paths):
-            brownian_motions[i].plot(ax=ax, color=cmap(i))
+            j = conduct_bijection(i, self.number_of_sample_paths, a)
+            brownian_motions[i].plot(ax=ax, color=cmap(j))
             plt.pause(0.001)
 
         plt.ioff
@@ -43,8 +49,14 @@ class OneDimBrownianMotionProcessor:
     def plot_and_display(self, brownian_motions):
         cmap = plt.cm.get_cmap("tab20", self.number_of_sample_paths)
         plt.figure(figsize=(20, 10))
+
+        # Will use this value to "randomise" the order of colours on the graph
+        a = find_coprime(self.number_of_sample_paths)
+
         for i in range(self.number_of_sample_paths):
-            brownian_motions[i].plot(color=cmap(i))
+            j = conduct_bijection(i, self.number_of_sample_paths, a)
+            brownian_motions[i].plot(color=cmap(j))
+
         plt.title("1D Brownian Motion")
         plt.xlabel("t")
         plt.ylabel("X(t)")

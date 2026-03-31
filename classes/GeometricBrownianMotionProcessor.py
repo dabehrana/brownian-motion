@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from .OneDimBrownianMotionProcessor import OneDimBrownianMotionProcessor
+from helper_functions import find_coprime
+from helper_functions import conduct_bijection
 
 
 class GeometricBrownianMotionProcessor:
@@ -30,22 +32,6 @@ class GeometricBrownianMotionProcessor:
 
         return pd.Series(realisations, index=[time for time in timeline])
 
-    def plot_geometric_brownian_motions(self, gbms):
-        cmap = plt.cm.get_cmap(
-            "tab20", self.one_dim_bm_processor.number_of_sample_paths)
-        plt.figure(figsize=(20, 10))
-
-        for i in range(self.one_dim_bm_processor.number_of_sample_paths):
-            gbms[i].plot(color=cmap(i))
-
-        plt.title("Geometric Brownian Motion")
-        plt.xlabel("t")
-        plt.ylabel("S(t)")
-        plt.grid(True, linewidth=0.2, linestyle="--", alpha=0.6)
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
-
     def plot_in_real_time(self, gbms):
         cmap = plt.cm.get_cmap(
             "tab20", self.one_dim_bm_processor.number_of_sample_paths)
@@ -58,8 +44,14 @@ class GeometricBrownianMotionProcessor:
         plt.legend()
         plt.tight_layout()
 
+        # Will use this value to "randomise" the order of colours on the graph
+        a = find_coprime(self.one_dim_bm_processor.number_of_sample_paths)
+
         for i in range(self.one_dim_bm_processor.number_of_sample_paths):
-            gbms[i].plot(ax=ax, color=cmap(i))
+            # "randomise" the order of colours on the graph
+            j = conduct_bijection(
+                i, self.one_dim_bm_processor.number_of_sample_paths, a)
+            gbms[i].plot(ax=ax, color=cmap(j))
             plt.pause(0.001)
 
         plt.ioff
@@ -70,8 +62,14 @@ class GeometricBrownianMotionProcessor:
             "tab20", self.one_dim_bm_processor.number_of_sample_paths)
         plt.figure(figsize=(20, 10))
 
+        # Will use this value to "randomise" the order of colours on the graph
+        a = find_coprime(self.one_dim_bm_processor.number_of_sample_paths)
+
         for i in range(self.one_dim_bm_processor.number_of_sample_paths):
-            gbms[i].plot(color=cmap(i))
+            # "randomise" the order of colours on the graph
+            j = conduct_bijection(
+                i, self.one_dim_bm_processor.number_of_sample_paths, a)
+            gbms[i].plot(color=cmap(j))
 
         plt.title("Geometric Brownian Motion")
         plt.xlabel("t")
