@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from .OneDimBrownianMotionProcessor import OneDimBrownianMotionProcessor
 from helper_functions import find_coprime
 from helper_functions import conduct_bijection
-
+from helper_functions import conduct_plots
 
 class GeometricBrownianMotionProcessor:
 
@@ -32,45 +32,11 @@ class GeometricBrownianMotionProcessor:
 
         return pd.Series(realisations, index=[time for time in timeline])
 
-    def plot_in_real_time(self, gbms):
-        cmap = plt.cm.get_cmap(
-            "tab20", self.one_dim_bm_processor.number_of_sample_paths)
-        plt.ion()
-        fig, ax = plt.subplots()
-        plt.title("Geometric Brownian Motion")
-        plt.xlabel("t")
-        plt.ylabel("S(t)")
-        plt.grid(True, linewidth=0.2, linestyle="--", alpha=0.6)
-        plt.legend()
-        plt.tight_layout()
-
-        # Will use this value to "randomise" the order of colours on the graph
-        a = find_coprime(self.one_dim_bm_processor.number_of_sample_paths)
-
-        for i in range(self.one_dim_bm_processor.number_of_sample_paths):
-            # "randomise" the order of colours on the graph
-            j = conduct_bijection(
-                i, self.one_dim_bm_processor.number_of_sample_paths, a)
-            gbms[i].plot(ax=ax, color=cmap(j))
-            plt.pause(0.001)
-
-        plt.ioff
-        input("Press enter to close the figure or end the program")
-
     def plot_and_display(self, gbms):
         cmap = plt.cm.get_cmap(
             "tab20", self.one_dim_bm_processor.number_of_sample_paths)
         plt.figure(figsize=(20, 10))
-
-        # Will use this value to "randomise" the order of colours on the graph
-        a = find_coprime(self.one_dim_bm_processor.number_of_sample_paths)
-
-        for i in range(self.one_dim_bm_processor.number_of_sample_paths):
-            # "randomise" the order of colours on the graph
-            j = conduct_bijection(
-                i, self.one_dim_bm_processor.number_of_sample_paths, a)
-            gbms[i].plot(color=cmap(j))
-
+        conduct_plots(self.one_dim_bm_processor.number_of_sample_paths, cmap, gbms)
         plt.title("Geometric Brownian Motion")
         plt.xlabel("t")
         plt.ylabel("S(t)")
@@ -78,3 +44,5 @@ class GeometricBrownianMotionProcessor:
         plt.legend()
         plt.tight_layout()
         plt.show()
+
+    
