@@ -1,5 +1,4 @@
 import math
-
 from matplotlib import pyplot as plt
 from matplotlib.colors import Colormap
 import pandas as pd
@@ -43,11 +42,12 @@ def conduct_bijection(i, n, a):
 
     return (a * i) % n
 
-def conduct_plots(n, cmap : Colormap, motions: list[pd.Series]):
-        # Will use this value to "randomise" the order of colours on the graph
-        a = find_coprime(n)
-        for i in range(n):
-            # "randomise" the order of colours on the graph
-            j = conduct_bijection(
-                i, n, a)
-            motions[i].plot(color=cmap(j))
+
+def conduct_plots(n, cmap: Colormap, motions: list[pd.Series]):
+    # Will use this value to "randomise" the order of colours on the graph
+    a = find_coprime(n)
+    for i in range(n):
+        # "randomise" the order of colours on the graph
+        j = conduct_bijection(
+            i, n, a)
+        motions[i].plot(color=cmap(j))

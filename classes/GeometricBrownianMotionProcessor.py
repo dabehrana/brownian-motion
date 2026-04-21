@@ -2,9 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from .OneDimBrownianMotionProcessor import OneDimBrownianMotionProcessor
-from helper_functions import find_coprime
-from helper_functions import conduct_bijection
 from helper_functions import conduct_plots
+
 
 class GeometricBrownianMotionProcessor:
 
@@ -36,7 +35,8 @@ class GeometricBrownianMotionProcessor:
         cmap = plt.cm.get_cmap(
             "tab20", self.one_dim_bm_processor.number_of_sample_paths)
         plt.figure(figsize=(20, 10))
-        conduct_plots(self.one_dim_bm_processor.number_of_sample_paths, cmap, gbms)
+        conduct_plots(
+            self.one_dim_bm_processor.number_of_sample_paths, cmap, gbms)
         plt.title("Geometric Brownian Motion")
         plt.xlabel("t")
         plt.ylabel("S(t)")
@@ -44,5 +44,3 @@ class GeometricBrownianMotionProcessor:
         plt.legend()
         plt.tight_layout()
         plt.show()
-
-    

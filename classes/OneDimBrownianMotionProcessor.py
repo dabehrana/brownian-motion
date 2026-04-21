@@ -1,8 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from helper_functions import conduct_plots, find_coprime
-from helper_functions import conduct_bijection
+from helper_functions import conduct_plots
 
 
 class OneDimBrownianMotionProcessor:
